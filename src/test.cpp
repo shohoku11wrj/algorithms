@@ -1,37 +1,29 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Cshape {
-	public:
-		void SetColor(int color) { m_nColor=color;}
-		virtual void Display( void) { cout<<"Cshape"<<endl; }
-	private:
-		int m_nColor;
-};
+void nyear(int n)
+{
+	long double multiplier = 1;
+	long double multiplier2 = 1;
+	for(int i=0; i<365*n; i++)
+	{
+		multiplier*=1.01;
+		multiplier2*=0.99;
+	}
+	multiplier*=100;
+	multiplier2*=100000000;
 
-class Crectangle: public Cshape {
-	public:
-		virtual void Display( void) { cout<<"Crectangle"<<endl; }
-};
-
-class Ctriangle: public Cshape {
-	public:
-	virtual void Display( void) { cout<<"Ctriangle"<<endl; }
-};
-
-class Cellipse :public Cshape {
-	public:
-		virtual void Display(void) { cout<<"Cellipse"<<endl;}
-};
+	cout<<"100 * 1.01/day * "<<n<<"year = " <<multiplier<<endl;
+	cout<<"100000000 * 0.99/day * "<<n<<"year = " << multiplier2<<endl;
+	cout<<endl;
+}
 
 int main()
 {
-	Cshape obShape;
-	Cellipse obEllipse;
-	Ctriangle obTriangle;
-	Crectangle obRectangle;
-	Cshape * pShape[4]= { &obShape,&obEllipse,&obTriangle,& obRectangle };
-	for( int I= 0; I< 4; I++)
-		pShape[I]->Display( );
-	return 0;
+	nyear(1);
+	nyear(2);
+	nyear(4);
+	nyear(8);
+
+	return 1;
 }
