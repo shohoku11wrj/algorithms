@@ -10,7 +10,7 @@ int main()
 	return 0;
 }
 
-void Hanoi(int n, char x, char y, char z)
+void Hanoi(int n, char x, char y, char z) // move x from x to z, bypass y
 {
 	void move(char x, int m, char y);
 	if(n==1) {

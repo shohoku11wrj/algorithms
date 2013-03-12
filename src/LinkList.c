@@ -67,10 +67,11 @@ void delete(Lnode *head, ElemType x)
 
 void insertNode(Lnode *head, int i, ElemType y); //Declaration of insertNode.
 void inverse(Lnode *head);
+void inversePrint_Recur(Lnode *head);
 
 void command(Lnode *head)
 {
-	printf("Input command number: 1-Delete 2-Insert 3-Print 4-Quit 5-Inverse\n");
+	printf("Input command number: 1-Delete 2-Insert 3-Print 4-Quit 5-Inverse 6-InversePrint_Recur\n");
 	int cmd;
 	scanf("%d",&cmd);
 	switch(cmd)
@@ -92,7 +93,8 @@ void command(Lnode *head)
 		}
 		case 3: printLnode(head); break;
 		case 4: printf("Quit\n"); break;
-		case 5: inverse(head);
+		case 5: inverse(head); break;
+		case 6: inversePrint_Recur(head->next); printf("\n"); break;
 		default: break;
 	}
 	if(cmd!=4)
@@ -131,8 +133,17 @@ void inverse(Lnode *head)
 		p->next=head->next;
 		head->next=p;
 		p=q;
-		
 	}
+}
+
+void inversePrint_Recur(Lnode *head)
+{
+	if(head==NULL) {
+		return;
+	}
+	inversePrint_Recur(head->next);
+	
+	printf("%d ", head->data);
 }
 
 void main()

@@ -1,29 +1,42 @@
 #include <iostream>
+#include "MyString.h"
+#include "Vector.h"
+
 using namespace std;
 
-void nyear(int n)
-{
-	long double multiplier = 1;
-	long double multiplier2 = 1;
-	for(int i=0; i<365*n; i++)
-	{
-		multiplier*=1.01;
-		multiplier2*=0.99;
+//void Swap (Vector<T> &a, Vector<T> &b) {
+//	int save_number_of_items = a.number_of_items;
+//	int save_size = a.size;
+//	T * save_array = a.array;
+//		
+//	a.number_of_items = b.number_of_items;
+//	a.size = b.size;
+//	a.array = b.array;
+//		
+//	b.number_of_items = b.save_number_of_items;
+//	b.size = save_size;
+//	b.array = save_array;
+//}
+//template <class U>
+void printVector(Vector<int> &v, int number) {
+	for(int i=0; i<number; i++) {
+		cout<<v[i]<<" ";
 	}
-	multiplier*=100;
-	multiplier2*=100000000;
-
-	cout<<"100 * 1.01/day * "<<n<<"year = " <<multiplier<<endl;
-	cout<<"100000000 * 0.99/day * "<<n<<"year = " << multiplier2<<endl;
 	cout<<endl;
 }
-
 int main()
 {
-	nyear(1);
-	nyear(2);
-	nyear(4);
-	nyear(8);
-
-	return 1;
+	Vector<int> a(3),b(2);
+	a.AddLast(4);
+	a.AddLast(9);
+	a.AddLast(2);
+	b.AddLast(8);
+	b.AddLast(1);
+	printVector(a,a.NumberOfItems());
+	printVector(b,b.NumberOfItems());
+	Swap<int> (a, b) ;
+	printVector(a,a.NumberOfItems());
+	printVector(b,b.NumberOfItems());
+	return 0;
 }
+

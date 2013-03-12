@@ -1,0 +1,44 @@
+Create array1, an empty Vector object with a default
+storage capacity = 10, using the default constructor.
+
+Demonstrating AddLast, a useful member function, which
+adds a given item as the last item of the
+sequence.
+
+Add one after another the following four string objects
+to array1 using the AddLast function. 
+CS 590WS, Course Material, Using, Vectors.
+Show the sequence of items in array1 using operator [].
+
+4
+
+Create array2, an empty Vector object
+of a specified storage capacity, say 5.
+
+set array2=array1.
+
+Show and delete the last item of array 2 using 
+ShowLast and RemoveLast functions.
+
+Vectors
+
+Show the number of items in array2 using NumberOfItems.
+
+3
+
+Remove all items in array2 using RemoveAll.
+
+Show array2 is empty using IsEmpty.
+
+array2 is empty.
+
+reset array2 = array1.
+
+Resize array2 so that its storage capacity = 2.
+Thus array2 gets truncated retaining its
+first 2 items only.
+
+Show number of items in array2 using NumberOfItems.
+
+2
+
