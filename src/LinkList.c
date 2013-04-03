@@ -37,7 +37,7 @@ void create(Lnode *head)
 void printLnode(Lnode *head)
 {
 	Lnode *node;
-	printf("This LinkNode is: ");
+	printf("This LinkList is: ");
 	node=head;
 	while(node->next!=NULL)
 	{

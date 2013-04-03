@@ -31,6 +31,7 @@ class Vector {
 
 		void Resize(int);
 		void RemoveAll();
+		virtual T DeleteMin();
 	
 	private:
 		T *array;
