@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "Vector.h"
 
 struct tree_node {
@@ -24,11 +25,12 @@ struct forest_roots {
 	}
 };
 
-Vector<tree_node> TREE;
-Vector<symbol_info> ALPHABET;
-Vector<forest_roots> FOREST;
+Vector<tree_node> TREE(10);
+Vector<symbol_info> ALPHABET(10);
+PriorityQueue<forest_roots> FOREST;
 
-template <class T>
+/*
+   template <class T>
 T Vector<T>::DeleteMin() {
 	T min= array[0];
 	array[0] = array[number_of_items-1];
@@ -65,29 +67,86 @@ T Vector<T>::DeleteMin() {
 	return min;
 }
 
+*/
+
 void Huffman() {
 	int lastnode = TREE.NumberOfItems(); // keep track of the number of nodes in the TREE
 	forest_roots least, second;
 	forest_roots newroot;
-	while(FOREST.NumberOfItems() > 1) {
+	while(FOREST.container.NumberOfItems() > 1) {
 		least = FOREST.DeleteMin();
+		cout << "last:root=" << least.root << ",weight=" << least.weight << endl;
 		second = FOREST.DeleteMin();
+		cout << "second:root=" << second.root << ",weight=" << second.weight << endl;
 		lastnode = lastnode +1 ;
-		TREE[lastnode].leftchild = least.root;
-		TREE[lastnode].rightchild = second.root;
-		TREE[lastnode].parent = 0;
-		TREE[least.root].parent = lastnode;
-		TREE[second.root].parent = lastnode;
+		tree_node tn;
+		TREE.AddLast(tn);
+		TREE[lastnode-1].leftchild = least.root;
+		TREE[lastnode-1].rightchild = second.root;
+		TREE[lastnode-1].parent = 0;
+		TREE[least.root-1].parent = lastnode;
+		TREE[second.root-1].parent = lastnode;
 		newroot.weight = least.weight + second.weight;
 		newroot.root = lastnode;
-		FOREST.AddLast(newroot);
+		FOREST.container.AddLast(newroot);
 	}
 }
 
+void printHuffman() {
+	cout << endl;
+	for(int i=0; i < FOREST.container.NumberOfItems(); i++ ) {
+		cout << "node " << i;
+		cout << ":root= " << FOREST.container[i].root; 
+		cout << ",weight=" << FOREST.container[i].weight << endl;
+	}
+}
+
+string printTreeNodeCode(int);
+
+void printTREE() {
+	 cout << "TREE:" << endl;
+	 cout << "S P L R Code" << endl;
+//	 while(!TREE.IsEmpty()) {
+//		tree_node temp = TREE.ShowLast();
+//		cout << temp.parent << " ";
+//		cout << temp.leftchild << " ";
+//		cout << temp.rightchild << " ";
+//		cout << endl;
+//		TREE.RemoveLast();
+//	 }
+	 for(int i=0; i < TREE.NumberOfItems(); i++) {
+		if(i<5) {
+			cout << ALPHABET[i].symbol << " ";
+		} else {
+			cout << "  ";
+		}
+		cout << TREE[i].parent << " ";
+		cout << TREE[i].leftchild << " ";
+		cout << TREE[i].rightchild << " ";
+		string code = printTreeNodeCode(i);
+		cout << code << endl;
+	 }
+}
+
+string printTreeNodeCode(int i) {
+	if(TREE[i].parent == 0) {
+		return "";
+	}
+
+	if(TREE[TREE[i].parent - 1].leftchild - 1 == i) {
+		return printTreeNodeCode(TREE[i].parent-1) + "0";
+	}
+	else {
+		return printTreeNodeCode(TREE[i].parent-1) + "1"; 
+	}
+}
 
 int main()
 {
 	tree_node tn;
+	tn.leftchild = 0;
+	tn.rightchild = 0;
+	tn.rightchild = 0;
 	TREE.AddLast(tn);
 	TREE.AddLast(tn);
 	TREE.AddLast(tn);
@@ -96,12 +155,12 @@ int main()
 	
 	symbol_info si;
 	si.symbol = 'b';
-	si.frequency = 5;
-	si.leaf = 2;
-	ALPHABET.AddLast(si);
-	si.symbol = 'a';
 	si.frequency = 3;
 	si.leaf = 1;
+	ALPHABET.AddLast(si);
+	si.symbol = 'a';
+	si.frequency = 5;
+	si.leaf = 2;
 	ALPHABET.AddLast(si);
 	si.symbol = 'c';
 	si.frequency = 4;
@@ -119,46 +178,25 @@ int main()
 	forest_roots fr;
 	fr.weight = 3;
 	fr.root = 1;
-	FOREST.AddLast(fr);
+	FOREST.container.AddLast(fr);
 	fr.weight = 5;
 	fr.root = 2;
-	FOREST.AddLast(fr);
+	FOREST.container.AddLast(fr);
 	fr.weight = 4;
 	fr.root = 3;
-	FOREST.AddLast(fr);
+	FOREST.container.AddLast(fr);
 	fr.weight = 6;
 	fr.root = 4;
-	FOREST.AddLast(fr);
+	FOREST.container.AddLast(fr);
 	fr.weight = 12;
 	fr.root = 5;
-	FOREST.AddLast(fr);
+	FOREST.container.AddLast(fr);
+
+	printHuffman();
 
 	Huffman();
 
-
+	printHuffman();
+	
+	printTREE();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

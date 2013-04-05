@@ -31,7 +31,6 @@ class Vector {
 
 		void Resize(int);
 		void RemoveAll();
-		virtual T DeleteMin();
 	
 	private:
 		T *array;
@@ -110,7 +109,7 @@ const T& Vector<T>::ShowLast() const {
 
 template <class T>
 T& Vector<T>::operator[](int index) {
-	assert(index < number_of_items && index>=0);
+//	assert(index < number_of_items && index>=0);
 	return array[index];
 }
 
@@ -163,4 +162,30 @@ void printVector(Vector<int> &v, int number) {
 			        cout<<v[i]<<" ";
 					    }   
 		    cout<<endl;
+}
+
+template <class T>
+class PriorityQueue {
+	public:
+		Vector<T> container;
+		T DeleteMin();
+};
+
+template <class T>
+T PriorityQueue<T>::DeleteMin() {
+	T min = container[0];
+//	container[0] = container[container.NumberOfItems() -1];
+//	int cur = 0;
+	int lastPos = container.NumberOfItems() -1;
+	for(int i = 0; i < container.NumberOfItems() - 1; i++) {
+		if(container[i] < container[lastPos]) {
+			T temp = container[i];
+			container[i] = container[lastPos];
+			container[lastPos] = temp;
+		}
+	}
+
+	min = container[lastPos];
+	container.RemoveLast();
+	return min;
 }
