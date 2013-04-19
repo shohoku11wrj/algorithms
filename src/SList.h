@@ -39,14 +39,14 @@ template <class T> class SList
 		void RemoveAfter(Iterator i);
 
 		class Iterator {
-			firend SList;
+			//friend SList;  // *friend should be defined in SList but not Iterator
 			private:
 				Node *nodePointer;
+			public:
 			// construct an iterator and set it to a given node
 			Iterator(const Node *setPtr) {
 				nodePointer = const_cast<Node *> ( setPtr);
 			}
-			public:
 				// default constructor
 				Iterator():nodePointer(0){}
 				// return reference of the item pointed by Iterator

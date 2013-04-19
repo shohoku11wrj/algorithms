@@ -1,3 +1,10 @@
+/*
+ * worst case complexity of searching or inserting an element into a BST is O(n)
+ * average case of Search, Insert and Delete in a BST is O(log n), where n is the number of nodes in the tree.
+ *
+ * The average path length in a BST P(n) = 1 + (2/N^2) * [sum of iP(i), where i = 0 to (n-1)]
+ * and P(n) <= 1+ 4*(log n) , more careful analysis show that P(n) <= 1 + 1.4*(log n)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -6,7 +6,7 @@
 
 template <class T>
 class PriorityQueue {
-	Vector<T> container;
+	Vector<T> container; // container is structed as a tree
 	public:
 		T DeleteMax();
 		void Insert(const T &a);
@@ -21,7 +21,7 @@ T PriorityQueue<T>::DeleteMax()
 	T maxElement = container[0];
 	//move the last element to the begining
 	container[0] = container[container.NumberOfItems() - 1];
-	int cur = 0;
+	int cur = 0; // root of the tree
 	int lastPos = container.NumberOfItems() - 1;
 	while ( (2*cur + 1 < lastPos) &&
 			(container[cur] < container[2*cur + 1]
