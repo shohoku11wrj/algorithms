@@ -43,10 +43,10 @@ template <class T> class SList
 			private:
 				Node *nodePointer;
 			public:
-			// construct an iterator and set it to a given node
-			Iterator(const Node *setPtr) {
-				nodePointer = const_cast<Node *> ( setPtr);
-			}
+				// construct an iterator and set it to a given node
+				Iterator(const Node *setPtr) {
+					nodePointer = const_cast<Node *> ( setPtr);
+				}
 				// default constructor
 				Iterator():nodePointer(0){}
 				// return reference of the item pointed by Iterator
@@ -68,6 +68,10 @@ template <class T> class SList
 					return retval;
 				}
 				// return true if the two iterators point to the same node
+				bool operator == (const Iterator &i) const {
+					return nodePointer == i.nodePointer;
+				}
+				// return true if the two iterators point to the different node
 				bool operator != (const Iterator &i) const {
 					return nodePointer != i.nodePointer;
 				}

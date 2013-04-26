@@ -1,0 +1,34 @@
+Demonstrating Insert which adds a given integer
+Add one after another the following integers 
+to int_q using the Insert function. 
+
+10, 40, 50, 3, 5, 10
+
+Demonstrating Insert which adds a given String object
+Add one after another the following strings 
+to int_q using the Insert function. 
+
+ "Hello:3" , "Hello:4" ,"Hello:1" , "Hello:2" 
+
+Demonstrating DeleteMax which removes the largest string from str_q
+
+Hello:1
+Hello:2
+Hello:3
+Hello:4
+
+str_q must now be empty
+TRUE
+
+Demonstrating DeleteMax which removes the largest integer from int_q
+
+3
+5
+10
+10
+40
+50
+
+int_q must now be empty
+TRUE
+
