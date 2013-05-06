@@ -12,6 +12,8 @@
 #include <stack>
 #include <queue>
 
+static int nodes, edges;
+
 ifstream input;
 Vector<int> no_indegree_nodes; // nodes with indegree is 0
 Vector<int> deleted_nodes; // assistant set of deleted nodes in Topological Sorting
@@ -80,7 +82,7 @@ int main(int argc, char **argv) // char *argv[]
 	input.open(argv[1]);
 	int ISDIGRAPH = atoi(argv[2]);
 
-	int nodes, edges;
+
 
 	input >> nodes >> edges;
 
@@ -137,66 +139,115 @@ void Print(Vector< SList<int> > digraph) {
 
 // Exploreform(s) , depth first search
 void DepthFirstSearch(Vector< SList<int> > digraph) {
-	Vector<bool> S(6); // visited nodes
+	Vector<bool> S(nodes); // visited nodes, nodes is static int = node count
 	stack<int> _s; // visited nodes still have outgoing unused edges 
-	int startNode = 0;
-	cout << "Start node = " << startNode << ", ";
-	S[0] = true;
 	// Mark all edges "unused"
-	cout << "depth search: ";
-	while(! digraph[startNode].IsEmpty()) {
-		_s.push(digraph[startNode].ShowFirst());
-		digraph[startNode].RemoveFirst();
+	for(int i=0; i<nodes; i++) {
+		S[i] = false;
 	}
+	int startNode = 0;
+	_s.push(startNode);
+	S[0] = true;
+
+	cout << "depth search: " << startNode << " ";
+//	while(! digraph[startNode-1].IsEmpty()) {
+//		_s.push(digraph[startNode-1].ShowFirst());
+//		digraph[startNode-1].RemoveFirst();
+//	}
 
 	while(! _s.empty()) { // _s is not empty
 		int curNode = _s.top(); // choose some node v in _s
+//	while(! digraph[curNode-1].IsEmpty()) {
+//		_s.push(digraph[curNode-1].ShowFirst());
+//		digraph[curNode-1].RemoveFirst();
 		SList<int>::Iterator it;
-		it = digraph[curNode].Begin(); // VecIter[v]
-		while(it != digraph[curNode].End() ) { // if there is no "unused" edge out of v
+		if(!digraph[curNode].IsEmpty()) {
+			it = digraph[curNode].Begin(); // VecIter[v]
+//		}
+//		if(it != digraph[curNode-1].End() ) { // if there is no "unused" edge out of v
 			// let (v,w) be the next unused edge out of v
 			int w = *it; // w = *(VecIter[v])
-			it++;
+			//it++;
 			if (S[w] == false) { // if w is not in S
 				S[w] = true; // add w to S
 				_s.push(w); // add w to _s
+				cout << w << " ";
 			}
+			digraph[curNode].RemoveFirst();
 		}
-		cout << _s.top() << " ";
-		_s.pop(); // delete v from _s
+		else {
+			_s.pop(); // delete v from _s
+		}
+//	}
 	} // end while
 	cout << endl;
 } // end Depth First Search
+
 
 // Exploreform(s) , breadth first search
 void BreadthFirstSearch(Vector< SList<int> > digraph) {
 	Vector<bool> S(6); // visited nodes
 	queue<int> _s; // visited nodes still have outgoing unused edges 
+	// Mark all edges "unused"
+	for(int i=0; i<6; i++) {
+		S[i] = false;
+	}
 	int startNode = 0;
-	cout << "Start node = " << startNode << ", ";
+	_s.push(startNode);
 	S[0] = true;
 	// Mark all edges "unused"
-	cout << "depth search: ";
-	while(! digraph[startNode].IsEmpty()) {
-		_s.push(digraph[startNode].ShowFirst());
-		digraph[startNode].RemoveFirst();
-	}
+	cout << "breadth search: " << startNode << " ";
 
 	while(! _s.empty()) { // _s is not empty
 		int curNode = _s.front(); // choose some node v in _s
 		SList<int>::Iterator it;
-		it = digraph[curNode].Begin(); // VecIter[v]
-		while(it != digraph[curNode].End() ) { // if there is no "unused" edge out of v
+		if(! digraph[curNode].IsEmpty()) { // if there is no "unused" edge out of v
+			it = digraph[curNode].Begin(); // VecIter[v]
 			// let (v,w) be the next unused edge out of v
 			int w = *it; // w = *(VecIter[v])
-			it++;
 			if (S[w] == false) { // if w is not in S
 				S[w] = true; // add w to S
 				_s.push(w); // add w to _s
+				cout << w << " ";
 			}
+			digraph[curNode].RemoveFirst();
 		}
-		cout << _s.front() << " ";
-		_s.pop(); // delete v from _s
+		else {
+			_s.pop(); // delete v from _s
+		}
 	} // end while
 	cout << endl;
-} // end Depth First Search
+} // end Breadth First Search
+
+//// Exploreform(s) , breadth first search
+//void BreadthFirstSearch_too2(Vector< SList<int> > digraph) {
+//	Vector<bool> S(6); // visited nodes
+//	queue<int> _s; // visited nodes still have outgoing unused edges 
+//	int startNode = 1;
+//	cout << "Start node = " << startNode << ", ";
+//	S[0] = true;
+//	// Mark all edges "unused"
+//	cout << "breadth search: ";
+//	while(! digraph[startNode-1].IsEmpty()) {
+//		_s.push(digraph[startNode-1].ShowFirst());
+//		digraph[startNode-1].RemoveFirst();
+//	}
+//
+//	while(! _s.empty()) { // _s is not empty
+//		int curNode = _s.front(); // choose some node v in _s
+//		SList<int>::Iterator it;
+//		it = digraph[curNode].Begin(); // VecIter[v]
+//		while(it != digraph[curNode].End() ) { // if there is no "unused" edge out of v
+//			// let (v,w) be the next unused edge out of v
+//			int w = *it; // w = *(VecIter[v])
+//			it++;
+//			if (S[w] == false) { // if w is not in S
+//				S[w] = true; // add w to S
+//				_s.push(w); // add w to _s
+//			}
+//		}
+//		cout << _s.front() << " ";
+//		_s.pop(); // delete v from _s
+//	} // end while
+//	cout << endl;
+//} // end Depth First Search
