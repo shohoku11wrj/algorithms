@@ -13,6 +13,19 @@ template <class T>
 class Vector {
 
 	friend void Swap <> (Vector<T>& a, Vector<T>& b);
+//		{
+//			int save_number_of_items = a.number_of_items;
+//			int save_size = a.size;
+//			T * save_array = a.array;
+//				
+//			a.number_of_items = b.number_of_items;
+//			a.size = b.size;
+//			a.array = b.array;
+//				
+//			b.number_of_items = save_number_of_items;
+//			b.size = save_size;
+//			b.array = save_array;
+//		}
 
 	public:
 		Vector(int capacity=10); // default constructor
@@ -31,7 +44,7 @@ class Vector {
 
 		void Resize(int);
 		void RemoveAll();
-	
+
 	private:
 		T *array;
 		int number_of_items;
@@ -109,7 +122,7 @@ const T& Vector<T>::ShowLast() const {
 
 template <class T>
 T& Vector<T>::operator[](int index) {
-//	assert(index < number_of_items && index>=0);
+	assert(index < number_of_items && index>=0);
 	return array[index];
 }
 
@@ -147,6 +160,9 @@ void Swap (Vector<T>& a, Vector<T>& b) {
 	int save_number_of_items = a.number_of_items;
 	int save_size = a.size;
 	T * save_array = a.array;
+	// the above line equals the following two lines
+//	T * save_array = new T;
+//	save_array=a.array;
 		
 	a.number_of_items = b.number_of_items;
 	a.size = b.size;
@@ -158,34 +174,24 @@ void Swap (Vector<T>& a, Vector<T>& b) {
 }
 
 void printVector(Vector<int> &v, int number) {
-	    for(int i=0; i<number; i++) {
-			cout<<v[i]<<" ";
-		}   
-		cout<<endl;
+	for(int i=0; i<number; i++) {
+		cout<<v[i]<<" ";
+	}   
+	cout<<endl;
 }
 
-template <class T>
-class PriorityQueue {
-	public:
-		Vector<T> container;
-		T DeleteMin();
-};
-
-template <class T>
-T PriorityQueue<T>::DeleteMin() {
-	T min = container[0];
-//	container[0] = container[container.NumberOfItems() -1];
-//	int cur = 0;
-	int lastPos = container.NumberOfItems() -1;
-	for(int i = 0; i < container.NumberOfItems() - 1; i++) {
-		if(container[i] < container[lastPos]) {
-			T temp = container[i];
-			container[i] = container[lastPos];
-			container[lastPos] = temp;
-		}
-	}
-
-	min = container[lastPos];
-	container.RemoveLast();
-	return min;
+int main()
+{
+    Vector<int> a(3),b(2);
+    a.AddLast(4);
+    a.AddLast(9);
+    a.AddLast(2);
+    b.AddLast(8);
+    b.AddLast(1);
+    printVector(a,a.NumberOfItems());
+    printVector(b,b.NumberOfItems());
+    Swap(a, b) ;
+    printVector(a,a.NumberOfItems());
+    printVector(b,b.NumberOfItems());
+    return 0;
 }
