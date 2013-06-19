@@ -4,13 +4,13 @@
 
 template <class T> class SList;
 
-template <class T> class SList 
+template <class T> class SList
 {
-	public:
-		class Iterator;
-		friend class Iterator;
-	protected:
-		struct Node {
+    public:
+        class Iterator;
+        friend class Iterator;
+    protected:
+        struct Node {
 			T data;
 			Node *next;
 			Node() { next = 0; }
@@ -175,7 +175,7 @@ template <class T>
 void SList<T>::RemoveAfter(SList<T>::Iterator i) {
 	assert( i.nodePointer != 0 && i.nodePointer->next != 0 );
 	Node *save = i.nodePointer->next;
-	i.nodePointer->next = i.NodePointer->next->next;
+	i.nodePointer->next = i.nodePointer->next->next;
 	delete save;
 }
 
