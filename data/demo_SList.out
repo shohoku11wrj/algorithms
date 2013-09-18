@@ -1,0 +1,74 @@
+Create list1, an empty SList object using
+ the default constructor.
+
+Demonstrating AddFirst which adds a given item
+as the first item of the sequence.
+
+Add one after another the following two string objects 
+to list1 using the AddFirst function. 
+
+"CS 590WS" and "Singly Linked".
+
+Demonstrating AddLast which adds a given item
+ as the last item of the sequence.
+
+Add one after another the following two string objects 
+to list1 using the AddLast function. 
+
+"List Class" and "Functionality".
+
+Create an iterator object i1 of type SList::Iterator.
+
+Show the sequence of items in list1 using i1.
+
+CS 590WS Singly Linked List Class Functionality 
+
+Reset i1 to point to the first item of list1.
+Advance iterator i1 so that it points to the third item.
+Show the item pointed by i1.
+
+List Class
+
+Demonstrating AddAfter which adds a given item
+ to list1 at a position referred to by i1.
+Add one after another the following two string objects.
+to list1 using the AddAfter function. 
+
+"SList" and "Class".
+
+Show the sequence of items in list1 using i1.
+
+CS 590WS Singly Linked List Class Class SList Functionality 
+
+Reset i1 to point to the first item of list1.
+Advance iterator i1 so that it points to the third item.
+
+Demonstrating RemoveAfter which removes the item
+in list1 at the position referred to by i1.
+
+Show the sequence of items in list1.
+
+CS 590WS Singly Linked List Class SList Functionality 
+
+Create list2, an empty SList object.
+
+set list2 = list1.
+
+Show and delete the first item of list2 using 
+ShowFirst and RemoveFirst functions.
+
+CS 590WS
+
+Remove all items in list2 using the SetToEmpty functions.
+
+Show list2 is empty using the IsEmpty function.
+
+list2 is empty.
+
+Replace the first item of list1 with the string 
+"Demonstrating" using the iterator i1.
+
+Show the sequence of items in list1.
+
+Demonstrating Singly Linked List Class SList Functionality 
+
